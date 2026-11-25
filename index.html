@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rushikesh Lokhandkar – Web Developer</title>
+<meta name="description" content="Portfolio of Rushikesh Lokhandkar, a web developer who builds fast, clean websites.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* रंग आणि फॉन्ट इथून बदला */
+  :root {
+    --bg: #f6f7fb;
+    --surface: #ffffff;
+    --ink: #172055;
+    --muted: #4d5580;
+    --line: #dfe2f0;
+    --accent: #ffd23f;
+    --accent-ink: #172055;
+    --link: #2d3fd1;
+    --head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1230;
+      --surface: #171c42;
+      --ink: #eef0ff;
+      --muted: #aab0d8;
+      --line: #2a3066;
+      --link: #9fb0ff;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 1.05rem/1.65 var(--body);
+  }
+  a { color: var(--link); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
+  h1, h2, h3 { font-family: var(--head); line-height: 1.1; margin: 0; }
+  h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 1.25rem; }
+  section { padding: 3.5rem 0; }
+
+  header.top { padding: 1rem 0; }
+  header.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .logo { font: 700 1.2rem var(--head); text-decoration: none; color: var(--ink); }
+  nav a { margin-left: 1.1rem; text-decoration: none; color: var(--muted); font-weight: 500; }
+  nav a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { padding: 3rem 0 4rem; }
+  .hero .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: center; }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); letter-spacing: -0.02em; }
+  .hero h1 mark { background: var(--accent); color: var(--accent-ink); padding: 0 .2em; border-radius: 6px; }
+  .hero p { color: var(--muted); max-width: 46ch; margin: 1.25rem 0 1.75rem; }
+  .btn {
+    display: inline-block; padding: .8rem 1.4rem; border-radius: 10px; font-weight: 500;
+    text-decoration: none; margin-right: .6rem; margin-bottom: .6rem;
+  }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); }
+  .btn.ghost { border: 2px solid var(--line); color: var(--ink); }
+  .btn:hover { transform: translateY(-2px); }
+
+  /* browser mock */
+  .mock { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 8px 8px 0 var(--accent); }
+  .mock .bar { display: flex; gap: 6px; padding: .6rem .8rem; border-bottom: 1px solid var(--line); }
+  .mock .bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); display: block; }
+  .mock pre { margin: 0; padding: 1rem; font: 0.85rem/1.6 ui-monospace, Consolas, monospace; overflow-x: auto; color: var(--ink); }
+  .mock .k { color: var(--link); }
+
+  /* About / skills */
+  .about { max-width: 62ch; color: var(--muted); }
+  .tags { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .tags li { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: .3rem .9rem; font-weight: 500; }
+
+  /* Projects */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .card .shot { aspect-ratio: 16 / 10; background: var(--line); display: grid; place-items: center; color: var(--muted); font-size: .9rem; }
+  .card .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card .body { padding: 1.1rem 1.2rem 1.3rem; }
+  .card h3 { font-size: 1.25rem; margin-bottom: .4rem; }
+  .card p { margin: 0 0 .8rem; color: var(--muted); font-size: .97rem; }
+  .card .meta { font-size: .9rem; color: var(--muted); margin-bottom: .8rem; }
+  .card .links a { margin-right: 1rem; font-weight: 500; }
+
+  /* Services */
+  .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+  .services div { border-left: 4px solid var(--accent); padding-left: 1rem; }
+  .services h3 { font-size: 1.15rem; margin-bottom: .3rem; }
+  .services p { margin: 0; color: var(--muted); font-size: .97rem; }
+
+  /* Contact */
+  .contact { background: var(--ink); color: var(--bg); border-radius: 18px; padding: 2.5rem 1.5rem; text-align: center; }
+  .contact p { margin: .8rem auto 1.5rem; max-width: 44ch; opacity: .85; }
+  .contact .btn.primary { margin: 0; }
+  .contact .alt { margin-top: 1.25rem; font-size: .95rem; }
+  .contact .alt a { color: var(--accent); margin: 0 .6rem; }
+  footer { text-align: center; padding: 2rem 0 3rem; color: var(--muted); font-size: .9rem; }
+
+  @media (max-width: 760px) {
+    .hero .wrap { grid-template-columns: 1fr; }
+    nav a:first-child { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top">Rushikesh Lokhandkar</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1. Hero: तुमचं नाव आणि एक ओळीचं वर्णन -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>I build <mark>fast, clean</mark> websites for small businesses.</h1>
+        <p>Hi, I'm Rushikesh Lokhandkar. I design and code responsive websites with HTML, CSS and JavaScript. Let's turn your idea into a page people enjoy using.</p>
+        <a class="btn primary" href="#projects">See my work</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="bar"><i></i><i></i><i></i></div>
+<pre><span class="k">const</span> developer = {
+  name: <span class="k">"Rushikesh Lokhandkar"</span>,
+  builds: <span class="k">"websites"</span>,
+  learning: <span class="k">"React"</span>,
+  available: <span class="k">true</span>
+};</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. About: २-३ वाक्यं, स्वतःबद्दल -->
+  <section id="about">
+    <div class="wrap">
+      <h2>About me</h2>
+      <p class="about">I'm a self-taught web developer from India. I enjoy turning designs into working websites and I care about details like speed, mobile layout and clear text. I'm always learning something new and I finish what I start.</p>
+      <ul class="tags">
+        <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Responsive design</li><li>Git &amp; GitHub</li><li>React (learning)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. Projects: स्क्रीनशॉट, वर्णन, Live आणि GitHub लिंक बदला -->
+  <section id="projects">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <div class="grid">
+
+        <article class="card">
+          <div class="shot"><!-- स्क्रीनशॉट: <img src="images/project1.png" alt="Project 1 screenshot"> -->Add screenshot</div>
+          <div class="body">
+            <h3>Local Cafe Website</h3>
+            <p>A mobile-friendly site with menu, photos and a map for a small cafe.</p>
+            <div class="meta">HTML, CSS, JavaScript</div>
+            <div class="links"><a href="#">Live site</a><a href="#">Code</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="shot">Add screenshot</div>
+          <div class="body">
+            <h3>Weather App</h3>
+            <p>Search any city and see today's weather, using a free weather API.</p>
+            <div class="meta">JavaScript, API</div>
+            <div class="links"><a href="#">Live site</a><a href="#">Code</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="shot">Add screenshot</div>
+          <div class="body">
+            <h3>To-do List</h3>
+            <p>Add, finish and delete tasks. Your list is saved in the browser.</p>
+            <div class="meta">JavaScript, localStorage</div>
+            <div class="links"><a href="#">Live site</a><a href="#">Code</a></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Services -->
+  <section id="services">
+    <div class="wrap">
+      <h2>What I can build for you</h2>
+      <div class="services">
+        <div><h3>Landing pages</h3><p>A single, clear page that explains your business and gets people to contact you.</p></div>
+        <div><h3>Small business sites</h3><p>Home, about, services and contact pages that work well on phones.</p></div>
+        <div><h3>Fixes and updates</h3><p>Broken layout, slow page or new section? I can improve your existing site.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Contact: फक्त ईमेल आणि सोशल लिंक्स. घराचा पत्ता किंवा फोन नंबर टाकू नका -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <h2>Let's work together</h2>
+        <p>Have a project in mind? Send me a short message about what you need.</p>
+        <a class="btn primary" href="mailto:rushikesh.dev1982@gmail.com">Email me</a>
+        <div class="alt">
+          <a href="https://github.com/yourusername">GitHub</a>
+          <a href="https://www.linkedin.com/in/yourusername">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Rushikesh Lokhandkar. Built by hand with HTML and CSS.</div>
+</footer>
+
+</body>
+</html>
